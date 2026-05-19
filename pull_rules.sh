@@ -9,7 +9,7 @@ Usage:
 Examples:
   bash ./pull_rules.sh
 
-The script pulls items from the latest .rules_v5 directory in the source
+The script pulls items from the latest .rules_v6 directory in the source
 repository into the current repository's .rules directory.
 
 Existing items under .rules are replaced only after confirmation.
@@ -18,7 +18,7 @@ USAGE
 }
 
 DEFAULT_SOURCE_REPO="yuki746289/product_agent_rules"
-DEFAULT_RULE_DIR=".rules_v5"
+DEFAULT_RULE_DIR=".rules_v6"
 
 normalize_repo_url() {
   local repo="$1"

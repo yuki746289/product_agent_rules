@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "summary": "TradingView のチャート上に EMA を3本表示する Pine Script インジケーターを新規作成する。",
+  "features": [
+    {"id": "L101", "sourceStepId": "S001", "type": "ADD", "summary": "Pine Script v6 とインジケーター宣言を行う。", "targetFunction": "global"},
+    {"id": "L102", "sourceStepId": "S002", "type": "ADD", "summary": "入力設定を定義する。", "targetFunction": "global"},
+    {"id": "L103", "sourceStepId": "S003", "type": "ADD", "summary": "selectEmaValue を使用して3本の EMA を計算する。", "targetFunction": "refreshEmaSeries"},
+    {"id": "L104", "sourceStepId": "S004", "type": "ADD", "summary": "plot で3本の EMA を表示する。", "targetFunction": "global"}
+  ],
+  "functions": [
+    {"id": "F101", "type": "ADD", "name": "refreshEmaSeries", "description": "3本分の EMA 算出を統括する主関数。"},
+    {"id": "T101", "type": "ADD", "name": "selectEmaValue", "description": "指定された価格ソースと期間から EMA を1本計算する補助関数。"}
+  ],
+  "inputs": [
+    {"id": "I101", "type": "ADD", "name": "sourceInput", "dataType": "series float", "description": "EMA 計算に使用する価格ソース。"},
+    {"id": "I102", "type": "ADD", "name": "ema1LengthInput", "dataType": "int", "description": "EMA1 の期間。"},
+    {"id": "I103", "type": "ADD", "name": "ema2LengthInput", "dataType": "int", "description": "EMA2 の期間。"},
+    {"id": "I104", "type": "ADD", "name": "ema3LengthInput", "dataType": "int", "description": "EMA3 の期間。"},
+    {"id": "I105", "type": "ADD", "name": "ema1ColorInput", "dataType": "color", "description": "EMA1 の表示色。"},
+    {"id": "I106", "type": "ADD", "name": "ema2ColorInput", "dataType": "color", "description": "EMA2 の表示色。"},
+    {"id": "I107", "type": "ADD", "name": "ema3ColorInput", "dataType": "color", "description": "EMA3 の表示色。"},
+    {"id": "I108", "type": "ADD", "name": "lineWidthInput", "dataType": "int", "description": "EMA ラインの太さ。"}
+  ],
+  "outputs": [
+    {"id": "O101", "type": "ADD", "name": "ema1Value", "dataType": "series float", "description": "EMA1 の値。"},
+    {"id": "O102", "type": "ADD", "name": "ema2Value", "dataType": "series float", "description": "EMA2 の値。"},
+    {"id": "O103", "type": "ADD", "name": "ema3Value", "dataType": "series float", "description": "EMA3 の値。"},
+    {"id": "O104", "type": "ADD", "name": "inputSettings", "dataType": "inputs", "description": "TradingView 設定画面で編集可能な入力群。"},
+    {"id": "O105", "type": "ADD", "name": "plotEma1", "dataType": "plot", "description": "EMA1 ライン。"},
+    {"id": "O106", "type": "ADD", "name": "plotEma2", "dataType": "plot", "description": "EMA2 ライン。"},
+    {"id": "O107", "type": "ADD", "name": "plotEma3", "dataType": "plot", "description": "EMA3 ライン。"}
+  ],
+  "variables": [
+    {"id": "V101", "type": "ADD", "name": "sourceInput", "dataType": "series float", "description": "入力価格ソース。"},
+    {"id": "V102", "type": "ADD", "name": "ema1LengthInput", "dataType": "int", "description": "EMA1 期間。"},
+    {"id": "V103", "type": "ADD", "name": "ema2LengthInput", "dataType": "int", "description": "EMA2 期間。"},
+    {"id": "V104", "type": "ADD", "name": "ema3LengthInput", "dataType": "int", "description": "EMA3 期間。"},
+    {"id": "V105", "type": "ADD", "name": "ema1ColorInput", "dataType": "color", "description": "EMA1 色。"},
+    {"id": "V106", "type": "ADD", "name": "ema2ColorInput", "dataType": "color", "description": "EMA2 色。"},
+    {"id": "V107", "type": "ADD", "name": "ema3ColorInput", "dataType": "color", "description": "EMA3 色。"},
+    {"id": "V108", "type": "ADD", "name": "lineWidthInput", "dataType": "int", "description": "線幅。"},
+    {"id": "V109", "type": "ADD", "name": "ema1Value", "dataType": "series float", "description": "EMA1 計算結果。"},
+    {"id": "V110", "type": "ADD", "name": "ema2Value", "dataType": "series float", "description": "EMA2 計算結果。"},
+    {"id": "V111", "type": "ADD", "name": "ema3Value", "dataType": "series float", "description": "EMA3 計算結果。"}
+  ],
+  "deleted_items": {
+    "features": [],
+    "functions": [],
+    "inputs": [],
+    "outputs": [],
+    "variables": []
+  },
+  "constraints": [
+    "Pine Script v6 を使用する。",
+    "plot はグローバルスコープで呼び出す。",
+    "期間と線幅は minval=1 とする。",
+    "売買シグナル、アラート、strategy 処理は対象外とする。",
+    "TradingView エディタでの実コンパイルはローカル環境では実施できない。"
+  ],
+  "invariants": [
+    "初版のため KEEP 対象なし。"
+  ]
+}

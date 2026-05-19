@@ -1,0 +1,56 @@
+//@version=6
+// 更新日時: 2026/05/19
+// 処理概要: [S001]-[S004] TradingView のチャート上に EMA を3本表示する。
+// 前回バージョンとの違い:
+// - [ADD]: EMA 3本表示インジケーターを新規追加
+// - [MOD]: なし
+// - [DEL]: なし
+// [L101] Pine Script v6 とインジケーター宣言
+indicator("Sample 3 EMA", shorttitle="3 EMA", overlay=true)
+
+// [L102] 入力設定を定義
+// [O104] TradingView 設定画面で編集可能な入力群
+// [I101] [V101] EMA 計算に使用する価格ソース
+sourceInput = input.source(close, "Source")
+
+// [I102] [V102] EMA1 の期間
+ema1LengthInput = input.int(20, "EMA 1 Length", minval=1)
+// [I103] [V103] EMA2 の期間
+ema2LengthInput = input.int(50, "EMA 2 Length", minval=1)
+// [I104] [V104] EMA3 の期間
+ema3LengthInput = input.int(200, "EMA 3 Length", minval=1)
+
+// [I105] [V105] EMA1 の表示色
+ema1ColorInput = input.color(color.teal, "EMA 1 Color")
+// [I106] [V106] EMA2 の表示色
+ema2ColorInput = input.color(color.orange, "EMA 2 Color")
+// [I107] [V107] EMA3 の表示色
+ema3ColorInput = input.color(color.purple, "EMA 3 Color")
+// [I108] [V108] EMA ラインの太さ
+lineWidthInput = input.int(2, "Line Width", minval=1)
+
+// [T101] 指定された価格ソースと期間から EMA を1本計算する補助関数
+selectEmaValue(sourceValue, lengthValue) =>
+    ta.ema(sourceValue, lengthValue)
+
+// [F101] 3本分の EMA 算出を統括する主関数
+refreshEmaSeries(sourceValue, ema1LengthValue, ema2LengthValue, ema3LengthValue) =>
+    // [L103] selectEmaValue を使用して3本の EMA を計算
+    // [O101] [V109] EMA1 の値
+    ema1ValueLocal = selectEmaValue(sourceValue, ema1LengthValue)
+    // [O102] [V110] EMA2 の値
+    ema2ValueLocal = selectEmaValue(sourceValue, ema2LengthValue)
+    // [O103] [V111] EMA3 の値
+    ema3ValueLocal = selectEmaValue(sourceValue, ema3LengthValue)
+    [ema1ValueLocal, ema2ValueLocal, ema3ValueLocal]
+
+// [O101] [O102] [O103] [V109] [V110] [V111] 3本分の EMA 値
+[ema1Value, ema2Value, ema3Value] = refreshEmaSeries(sourceInput, ema1LengthInput, ema2LengthInput, ema3LengthInput)
+
+// [L104] plot で3本の EMA を表示
+// [O105] EMA1 ライン
+plot(ema1Value, title="EMA 1", color=ema1ColorInput, linewidth=lineWidthInput)
+// [O106] EMA2 ライン
+plot(ema2Value, title="EMA 2", color=ema2ColorInput, linewidth=lineWidthInput)
+// [O107] EMA3 ライン
+plot(ema3Value, title="EMA 3", color=ema3ColorInput, linewidth=lineWidthInput)

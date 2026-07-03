@@ -145,8 +145,17 @@ for source_item in "${source_items[@]}"; do
   if [[ -e "$destination_item" || -L "$destination_item" ]]; then
     echo
     if confirm "Replace '$display_path'?"; then
+      custom_rule_backup=""
+      if [[ "$item_name" == "dev" && -f "$destination_item/rules_dev_custom.md" ]]; then
+        custom_rule_backup="$tmp_dir/rules_dev_custom.md"
+        cp "$destination_item/rules_dev_custom.md" "$custom_rule_backup"
+      fi
       rm -rf "$destination_item"
       cp -R "$source_item" "$destination_item"
+      if [[ -n "$custom_rule_backup" ]]; then
+        cp "$custom_rule_backup" "$destination_item/rules_dev_custom.md"
+        echo "Kept local custom rule: '.rules/dev/rules_dev_custom.md'."
+      fi
       replaced_count=$((replaced_count + 1))
     else
       echo "Skipped '$display_path'."

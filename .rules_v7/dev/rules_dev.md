@@ -10,6 +10,10 @@
 
 ### 必ず守るルール
   - 共通ルール: `.rules/rules_common.md`
+  - カスタムルール: `.rules/dev/rules_dev_custom.md`
+
+  `rules_dev_custom.md`は、プロジェクト固有の開発ルールを記載するためのファイルです。
+  デフォルトは空とし、必要な場合のみルールを追加して下さい。
 
 ### 開発種類
 

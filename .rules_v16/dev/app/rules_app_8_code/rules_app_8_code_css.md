@@ -41,7 +41,7 @@ CSS修正時に、既存の共通部品、画面別スタイル、レスポン�
 |---|---|---|
 |共通class|`clsCommon` + 部品名。|`clsCommonArticleBase`, `clsCommonChatList`|
 |画面固有class|`cls` + 画面/部品名。|`clsBoxLogin`, `clsBoxSearchCondition`|
-|idセレクタ|JSとの結合が強いため、CSSだけの都合で新設・変更しない。|`#idOpenLayersMap`|
+|idセレクタ|使用禁止。`id...`はHTMLとJavaScriptの操作・識別用として保持し、表示スタイルは必ずclassセレクタで指定する。|禁止: `#idOpenLayersMap` / 使用: `.clsOpenLayersMap`|
 |子要素指定|原則として空白による子孫セレクタではなく、`>` による直接子セレクタを使用する。DOM順序依存を明記・確認する。|`.clsCommonUserList > tbody > tr > td:nth-child(1)`|
 |既存例外|`table.clsCommonTableTab th` など、少数の既存空白セレクタは周辺形式を維持する。新規追加時は `>` を優先する。|`table.clsCommonTableTab th`|
 
@@ -165,6 +165,10 @@ CSSファイルの先頭は、既存共通CSSに合わせて次の大型コメ�
 
 ## 9. 禁止・注意事項
 
+- 自作CSSでは、単独・複合・子孫・直接子・疑似クラス内を含めて `#id...` セレクタを使用してはいけない。
+- 画面固有の表示スタイルは `.cls` + 画面/部品名、共通部品は `.clsCommon` + 部品名で指定する。`.class...` は使用しない。
+- HTMLとJavaScriptで使用している `id...` は削除・改名せず、同じDOMへCSS用classを追加してCSSセレクタを置き換える。
+- 変更対象に既存の `#id...` セレクタが含まれる場合は、その変更範囲をclassセレクタへ置き換え、変更CSSに `#id...` を残してはいけない。
 - 第三者CSSを直接変更しない。
 - 共通CSSを、単一画面の都合だけで変更しない。
 - 新規CSSで空白による広い子孫セレクタを安易に追加しない。

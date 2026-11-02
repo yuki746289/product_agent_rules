@@ -48,6 +48,9 @@
 
 ## 5. 目視確認
 
+- [ ] 変更した自作CSSのセレクタに `#id...` が0件であり、HTML/JavaScript用idをCSS指定に使用していない。
+- [ ] 画面固有classは `.cls...`、共通classは `.clsCommon...` であり、`.class...` を使用していない。
+- [ ] idをJavaScript操作用として維持し、表示スタイルが必要な同じDOMへCSS用classを追加している。
 - [ ] 共通CSSと画面別CSSの配置先が責務と一致している。
 - [ ] 新規セレクタは直接子の `>` を優先している。
 - [ ] 固定幅の横超過を、先に `max-width`、`min()`、`max()`、`clamp()`、flex/gridで検討している。
